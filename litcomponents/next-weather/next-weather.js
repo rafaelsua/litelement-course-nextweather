@@ -6,17 +6,33 @@ class NextWeather extends LitElement {
     return {
       temperature: {type: Number},
       unit: {type: String},
-      city: {type: String},
-      debug: {type: Boolean}
+      location: {type: Object}      
     };
   }
 
   constructor() {
     super();
     this.temperature = 10;
-    this.unit = 'C';
-    this.city = 'Madrid';
+    //this.unit = 'C';
+    this._unit = 'C';
     this.debug = true;
+    this.location = { city: 'Colmenar Viejo', community: 'Madrid' };
+  }
+
+  set unit(value){
+    if(this._unit == value){
+      return;
+    }
+
+    if(value === 'C' || value === 'F'){
+      const oldValue = this._unit;
+      this._unit = value;
+      this.requestUpdate('unit', oldValue);
+    }
+  }
+  
+  get unit(){
+    return this._unit;
   }
 
   render() {
@@ -25,7 +41,7 @@ class NextWeather extends LitElement {
 
     return html`
       <h1>${this.temperature}º ${this.unit}</h1>
-      <h3>Ahora, en ${this.city}.</h3>
+      <h3>Ahora, en ${this.location.city}.</h3>
       <button @click=${this.onClickButton}>Actualizar</button>
     `;
   }
