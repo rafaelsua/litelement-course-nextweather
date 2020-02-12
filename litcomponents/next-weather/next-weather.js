@@ -20,6 +20,9 @@ class NextWeather extends LitElement {
   }
 
   render() {
+    
+    console.log("render");
+
     return html`
       <h1>${this.temperature}º ${this.unit}</h1>
       <h3>Ahora, en ${this.city}.</h3>
@@ -41,6 +44,38 @@ class NextWeather extends LitElement {
   updateTemperatureData() {
     this.temperature = Math.floor(Math.random() * (40 - 10) -10);
   }
+
+  performUpdate(){
+    console.log("performUpdate");
+    const result = super.performUpdate();
+    console.log("performUpdate result "+result);
+    return result;
+  }
+
+  update(args){
+    console.log("update with args", args);
+    const result = super.update();
+    console.log("update result "+result);
+    return result;
+  }
+
+  /*
+  shouldUpdate(){
+    console.log("shouldUpdate");
+    const result = super.shouldUpdate();
+    return result;
+  }
+  */
+
+  shouldUpdate(changedProperties) {
+    console.log("shouldUpdate properties changed ");
+    changedProperties.forEach((oldValue, propName) => {
+      console.log(`\t ${propName} changed. oldValue: ${oldValue}`);
+    });
+    const result = super.shouldUpdate(changedProperties);
+    return result;
+  }
+
 }
 
 customElements.define('next-weather', NextWeather);
