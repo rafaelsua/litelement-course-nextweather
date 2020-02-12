@@ -11,6 +11,14 @@ class NextWeather extends LitElement {
     };
   }
 
+  constructor() {
+    super();
+    this.temperature = 10;
+    this.unit = 'C';
+    this.city = 'Madrid';
+    this.debug = true;
+  }
+
   render() {
     return html`
       <h1>${this.temperature}º ${this.unit}</h1>
@@ -31,7 +39,7 @@ class NextWeather extends LitElement {
   }
 
   updateTemperatureData() {
-    this.temperature = 3;
+    this.temperature = Math.floor(Math.random() * (40 - 10) -10);
   }
 }
 
