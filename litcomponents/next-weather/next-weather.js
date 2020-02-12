@@ -6,7 +6,9 @@ class NextWeather extends LitElement {
     return {
       temperature: {type: Number},
       unit: {type: String},
-      location: {type: Object}      
+      location: {type: Object},
+      realtime: Boolean,
+      source: String
     };
   }
 
@@ -75,19 +77,19 @@ class NextWeather extends LitElement {
     return result;
   }
 
-  /*
-  shouldUpdate(){
-    console.log("shouldUpdate");
-    const result = super.shouldUpdate();
-    return result;
-  }
-  */
-
   shouldUpdate(changedProperties) {
     console.log("shouldUpdate properties changed ");
     changedProperties.forEach((oldValue, propName) => {
       console.log(`\t ${propName} changed. oldValue: ${oldValue}`);
     });
+/*
+    if(this.realtime && (changedProperties.get('source') || changedProperties.get('realtime'))){
+      if(this.realtime === true && source === 'sensor'){
+
+      }
+
+    }
+*/
     const result = super.shouldUpdate(changedProperties);
     return result;
   }
